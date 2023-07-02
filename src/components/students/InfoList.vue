@@ -123,6 +123,7 @@ export default {
     edit(row) {
       console.log(row)
       this.form = {...row}
+      //测试一下
       //this.form = row 会直接把修改表单里面的数据渲染了
       this.state = false
       this.dialogFormVisible = true
