@@ -20,7 +20,8 @@
 </template>
 <script>
 import {nameRule,passRule } from '../utils/validate.js'
-//mport{  setToken } from '@/utils/setToken.js'
+import{  setToken } from '@/utils/setToken.js'
+import {login} from '@/api/api.js'
 export default {
   data() {
     
@@ -40,10 +41,28 @@ export default {
       this.$refs[form].validate((valid) => {
         if (valid) {
           console.log(this.form);
+          /*把登录方法封装成api进行调用
           this.service.post('/login',this.form)
           .then(res =>{
+            if(res.data.status ===200){
+              setToken('username',res.data.username)
+              setToken('token',res.data.token)
+              this.$message({message:res.data.message,type:'success'})
+              this.$router.push('/home')
+            }
             console.log(res)
           })
+          */
+         login(this.form).then(res=>{
+           if(res.data.status ===200){
+              setToken('username',res.data.username)
+              setToken('token',res.data.token)
+              this.$message({ message:"登录成功！",type:'success'})
+             // this.$message({ message:res.data.message,type:'success'})
+              // this.$message({ message: "删除数据成功", type: "success" });
+              this.$router.push('/home')
+            }
+         })
         } else {
           console.error(this.form);
         }
@@ -57,11 +76,18 @@ export default {
   width: 100%;
   height: 100%;
   position: absolute;
-  background: #409eff;
+  background:url('../assets/bg.jpg') center no-repeat;
+  .el-card{
+    background: #65768557;
+  }
   .box-card {
     width: 450px;
     margin: 200px auto;
-    .el-card_header {
+    color: #fff;
+    .el-form .el-form-item__lable{
+        color: #fff;
+    }
+    .el-card__header {
       font-size: 34px;
     }
     .el-button {
