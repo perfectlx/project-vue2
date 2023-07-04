@@ -7,10 +7,12 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import service from './service'
+import echarts from 'echarts'
 Vue.prototype.axios = axios //可以全剧使用
 
 Vue.use(ElementUI)
 Vue.prototype.service = service
+Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 
 new Vue({
